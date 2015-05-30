@@ -1,0 +1,148 @@
+﻿<UserControl x:Class="Pathfinder.UI.Views.PathfinderMapView"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+            xmlns:wpf="http://schemas.xceed.com/wpf/xaml/toolkit"
+            xmlns:local="clr-namespace:Pathfinder.UI"
+            xmlns:ViewModels="clr-namespace:Pathfinder.UI.ViewModels"
+            xmlns:Converters="clr-namespace:Pathfinder.UI.ValueConverters"
+            mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="800">
+
+    <UserControl.Resources>
+
+        <!-- Converters -->
+        <Converters:PositionCoverter x:Key="PositionConverter"/>
+        <Converters:CellFillConverter x:Key="CellFillConverter"/>
+        <Converters:CellBorderConverter x:Key="CellBorderConverter"/>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
+        <!-- Detail Resources -->
+        <SolidColorBrush Color="SteelBlue" x:Key="DetailBrush"/>
+        
+        <!-- Template for NodeViewModel -->
+        <DataTemplate DataType="{x:Type ViewModels:NodeViewModel}">
+            <Border Width="{x:Static local:UIConstants.CellSize}"
+                    Height="{x:Static local:UIConstants.CellSize}"
+                    BorderBrush="{Binding IsInWorkQueue, Converter={StaticResource CellBorderConverter}}"
+                    BorderThickness="2"
+                    x:Name="NodeRoot"
+                    PreviewMouseDown="NodeRoot_MouseDown"
+                    PreviewMouseMove="NodeRoot_MouseMove"
+                    MouseLeave="NodeRoot_MouseLeave">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Open}" Value="true">
+                                <Setter Property="Background" Value="LightGray"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Open}" Value="false">
+                                <Setter Property="Background" Value="#FF2C2323"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+
+                <!-- Content of node -->
+                <StackPanel IsHitTestVisible="False">
+                    <TextBlock Text="{Binding Text}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="8" Foreground="Black"/>
+                </StackPanel>
+
+            </Border>
+        </DataTemplate>
+
+        <!-- Template for LineViewModel -->
+        <DataTemplate DataType="{x:Type ViewModels:LineViewModel}">
+            <Line X1="{Binding X1, Converter={StaticResource PositionConverter}}"
+                    Y1="{Binding Y1, Converter={StaticResource PositionConverter}}"
+                    X2="{Binding X2, Converter={StaticResource PositionConverter}}"
+                    Y2="{Binding Y2, Converter={StaticResource PositionConverter}}"
+                    Stroke="{StaticResource ResourceKey=DetailBrush}"
+                    StrokeThickness="2">
+            </Line>
+        </DataTemplate>
+
+        <!-- Template for Blue Pin model -->
+        <DataTemplate DataType="{x:Type ViewModels:BluePinViewModel}">
+            <Grid Width="{x:Static local:UIConstants.CellSize}"
+                  Height="{x:Static local:UIConstants.CellSize}">
+                <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Pathfinder.UI;component/Resources/Pins/BluePin.png" Margin="5"/>
+            </Grid>
+        </DataTemplate>
+
+        <!-- Template for Green Pin model -->
+        <DataTemplate DataType="{x:Type ViewModels:GreenPinViewModel}">
+            <Grid Width="{x:Static local:UIConstants.CellSize}"
+                  Height="{x:Static local:UIConstants.CellSize}">
+                <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Pathfinder.UI;component/Resources/Pins/GreenPin.png" Margin="5"/>
+            </Grid>
+        </DataTemplate>
+
+    </UserControl.Resources>
+
+    <Grid>
+        <!-- Map Underlay -->
+        <wpf:Zoombox MinScale="0.5" MaxScale="1" Position="50,50" KeepContentInBounds="True">
+            <Grid Width="{Binding MapFrameWidth}" Height="{Binding MapFrameHeight}">
+
+                <!-- Node / Map Layer -->
+                <ItemsControl x:Name="MapUnderlay" Grid.Column="0" 
+                              ItemsSource="{Binding NodeList}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemContainerStyle>
+                        <Style TargetType="{x:Type FrameworkElement}">
+                            <Setter Property="Canvas.Top" Value="{Binding YPosition, Converter={StaticResource PositionConverter}}"/>
+                            <Setter Property="Canvas.Left" Value="{Binding XPosition, Converter={StaticResource PositionConverter}}"/>
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+                </ItemsControl>
+
+                <!-- Line Overlay -->
+                <ItemsControl Grid.Column="0" x:Name="LineOverlay" Background="Transparent" ItemsSource="{Binding LineList}" IsHitTestVisible="False">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas Background="Transparent"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemContainerStyle>
+                        <Style>
+                            <Setter Property="Canvas.Top" Value="25"/>
+                            <Setter Property="Canvas.Left" Value="25"/>
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+                </ItemsControl>
+
+                <!-- Map Object Overlay -->
+                <ItemsControl Grid.Column="0" x:Name="MapObjectOverlay" Background="Transparent" ItemsSource="{Binding MapObjectList}" IsHitTestVisible="False">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas Background="Transparent"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemContainerStyle>
+                        <Style TargetType="FrameworkElement">
+                            <Setter Property="Canvas.Top" Value="{Binding YPosition, Converter={StaticResource PositionConverter}}"/>
+                            <Setter Property="Canvas.Left" Value="{Binding XPosition, Converter={StaticResource PositionConverter}}"/>
+                            <Setter Property="Visibility" Value="{Binding Visible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+                </ItemsControl>
+
+            </Grid>
+        </wpf:Zoombox>
+        
+        <!-- Details Overlay -->
+        <Grid IsHitTestVisible="False">
+            <Border CornerRadius="5" Width="127" Height="32" Margin="20"
+                    HorizontalAlignment="Right" VerticalAlignment="Top"
+                    BorderThickness="2" BorderBrush="DarkGray" Background="#D8D3D3D3">
+                <Label x:Name="NodeDetails" Foreground="{StaticResource ResourceKey=DetailBrush}" Margin="5" HorizontalContentAlignment="Center"/>
+            </Border>
+        </Grid>
+    </Grid>
+
+</UserControl>

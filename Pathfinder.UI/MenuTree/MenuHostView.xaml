@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="Rhodes.WpfSandbox.MenuTree.MenuHostView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:local="clr-namespace:Rhodes.WpfSandbox.MenuTree"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d">
+    
+    <UserControl.Resources>
+
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="Width" Value="32"/>
+            <Setter Property="Height" Value="32"/>
+        </Style>
+
+        <DataTemplate DataType="{x:Type local:MenuItem}">
+            <Button ToolTip="{Binding ButtonToolTip}"
+                    Click="MenuItem_Click">
+                <Image Source="{Binding ButtonImagePath}"/>
+            </Button>
+        </DataTemplate>
+
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
+    </UserControl.Resources>
+
+    <Grid Width="152">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition MinHeight="38"/>
+            <RowDefinition Height="38"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+            <Label Content="{Binding Header}" VerticalAlignment="Center"/>
+            <Image Source="{Binding HeaderImagePath}" Width="32" Height="32" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <!-- Commands Panel -->
+        <ItemsControl Grid.Row="1" x:Name="ButtonPanel" ItemsSource="{Binding MenuOptions}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="4"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+
+        <!-- Back / Cancel Buttons -->
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" >
+            <Button Visibility="{Binding ShowBack, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Command="{Binding BackCommand}">
+                <Image Source="/Pathfinder.UI;component/Resources/Command-Back.png"/>
+            </Button>
+            <Button Grid.Row="2" HorizontalAlignment="Right" 
+                Visibility="{Binding ShowCancel, Converter={StaticResource BooleanToVisibilityConverter}}"
+                Command="{Binding CancelCommand}">
+                <Image Source="/Pathfinder.UI;component/Resources/Command-Cancel.png"/>
+            </Button>
+        </StackPanel>
+
+    </Grid>
+</UserControl>
