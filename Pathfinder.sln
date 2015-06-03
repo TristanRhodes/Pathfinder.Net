@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pathfinder.Core.Tests", "Pathfinder.Core.Tests\Pathfinder.Core.Tests.csproj", "{35C366F2-F6EF-4D67-817C-C77BCDA08FA3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pathfinder.UI", "Pathfinder.UI\Pathfinder.UI.csproj", "{712825E6-1352-4576-8A42-6DB4332B7D19}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assemblies", "Assemblies", "{7CC0F398-E8B2-4288-A68F-F1DAE84D5986}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pathfinder.Core", "Pathfinder.Core\Pathfinder.Core.csproj", "{99566705-C9A0-4CCC-A689-D2FD76AE4886}"
 EndProject
