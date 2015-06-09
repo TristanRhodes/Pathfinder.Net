@@ -83,7 +83,6 @@ namespace Pathfinder.UI.ViewModels
         {
             get
             {
-                // TODO: Fix!
                 var pathfinder = ServiceLocator.Current.GetInstance<PathfinderViewModel>();
                 return pathfinder.MapHost;
             }

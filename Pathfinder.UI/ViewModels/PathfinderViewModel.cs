@@ -68,6 +68,7 @@ namespace Pathfinder.UI.ViewModels
         }
 
 
+        //TODO: Isolate and remove.
         public MapHostViewModel MapHost
         {
             get { return _mapHostViewModel; }
@@ -347,12 +348,6 @@ namespace Pathfinder.UI.ViewModels
         }
 
 
-        private bool IsInQueue(int x, int y)
-        {
-            return _pathfinder.WorkQueue.Any(n => n.X == x && n.Y == y);
-        }
-
-
         private void HandleToolBarCommand(ExecuteToolBarCommandMessage msg)
         {
             base.SafeExecute(() =>
@@ -449,13 +444,15 @@ namespace Pathfinder.UI.ViewModels
 
         private void RefreshNodeText()
         {
+            var isInQueue = (Func<int, int, bool>)((int x, int y) => _pathfinder.WorkQueue.Any(n => n.X == x && n.Y == y));
+
             for (var x = 0; x < _world.Width; x++)
             {
                 for (var y = 0; y < _world.Height; y++)
                 {
                     var node = _pathfinder.Solution[x, y];
 
-                    var inQueue = IsInQueue(x, y);
+                    var inQueue = isInQueue(x, y);
                     var text = node.Explored ?
                         string.Format("({1}, {2}) {0}C: {3}{0}H: {4}{0}V: {5}",
                         Environment.NewLine,
