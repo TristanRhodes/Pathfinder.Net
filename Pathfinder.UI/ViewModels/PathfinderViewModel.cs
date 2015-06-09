@@ -43,11 +43,6 @@ namespace Pathfinder.UI.ViewModels
         private Coordinate _source;
         private Coordinate _target;
 
-
-        // Command Holder
-        private List<ICommand> _commands = new List<ICommand>();
-
-
         // Dependencies
         public IFileService FileService { get; private set; }
 
@@ -217,7 +212,6 @@ namespace Pathfinder.UI.ViewModels
             var state = !(MapHost.World[node.XPosition, node.YPosition]);
 
             var command = new ToggleNodeCommand(MapHost, coordinate, state);
-            _commands.Add(command);
 
             command.Execute(null);
         }
