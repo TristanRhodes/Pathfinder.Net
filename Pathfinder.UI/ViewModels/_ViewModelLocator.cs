@@ -44,7 +44,11 @@ namespace Pathfinder.UI.ViewModels
                 //SimpleIoc.Default.Register<IDataService, DataService>();
             }
 
+            // Services
             SimpleIoc.Default.Register<IFileService, DefaultFileService>(); 
+
+            // View Models
+            SimpleIoc.Default.Register<ToolBarViewModel>();
             SimpleIoc.Default.Register<PathfinderViewModel>();
         }
 
@@ -56,11 +60,21 @@ namespace Pathfinder.UI.ViewModels
             }
         }
 
+        public ToolBarViewModel ToolBar
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ToolBarViewModel>();
+            }
+        }
+
         public MapHostViewModel MapHost
         {
             get
             {
-                throw new NotImplementedException();
+                // TODO: Fix!
+                var pathfinder = ServiceLocator.Current.GetInstance<PathfinderViewModel>();
+                return pathfinder.MapHost;
             }
         }
         

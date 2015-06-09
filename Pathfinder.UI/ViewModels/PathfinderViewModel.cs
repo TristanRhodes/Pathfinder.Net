@@ -60,7 +60,6 @@ namespace Pathfinder.UI.ViewModels
 
             _menuHostViewModel = CreateMenu();
             _mapHostViewModel = CreateMap();
-            _toolBarViewModel = CreateToolBar();
 
             CreateNewWorld(9, 9);
         }
@@ -121,10 +120,6 @@ namespace Pathfinder.UI.ViewModels
             return hostViewModel;
         }
 
-        private ToolBarViewModel CreateToolBar()
-        {
-            return new ToolBarViewModel();
-        }
 
 
         protected override void SubscribeToEvents()

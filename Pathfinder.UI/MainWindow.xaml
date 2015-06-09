@@ -50,7 +50,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <fluent:Ribbon DataContext="{Binding ToolBarHost}">
+        <fluent:Ribbon DataContext="{Binding ToolBar, Source={StaticResource ViewModelLocator}}">
             <fluent:RibbonTabItem Header="Home">
                 
                 <fluent:RibbonGroupBox Header="File">
