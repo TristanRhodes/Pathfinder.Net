@@ -119,10 +119,7 @@
                         <!-- Timer Panel -->
                         <xcad:LayoutAnchorablePane DockMinWidth="200" DockWidth="240">
                             <xcad:LayoutAnchorable ContentId="timer" Title="Frame Timer" IconSource="Resources/TimerTabIcon.png" CanHide="False" CanClose="False" AutoHideWidth="240" FloatingWidth="240" FloatingLeft="100" FloatingTop="100">
-                                <ContentControl Height="125">
-                                    <ContentControl.Content>
-                                        <ViewModels:TimerViewModel/>
-                                    </ContentControl.Content>
+                                <ContentControl Height="125" Content="{Binding Timer, Source={StaticResource ViewModelLocator}}">
                                 </ContentControl>
                             </xcad:LayoutAnchorable>
                         </xcad:LayoutAnchorablePane>

@@ -48,6 +48,7 @@ namespace Pathfinder.UI.ViewModels
             SimpleIoc.Default.Register<IFileService, DefaultFileService>(); 
 
             // View Models
+            SimpleIoc.Default.Register<TimerViewModel>();
             SimpleIoc.Default.Register<ToolBarViewModel>();
             SimpleIoc.Default.Register<PathfinderViewModel>();
         }
@@ -65,6 +66,14 @@ namespace Pathfinder.UI.ViewModels
             get
             {
                 return ServiceLocator.Current.GetInstance<ToolBarViewModel>();
+            }
+        }
+
+        public TimerViewModel Timer
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<TimerViewModel>();
             }
         }
 
