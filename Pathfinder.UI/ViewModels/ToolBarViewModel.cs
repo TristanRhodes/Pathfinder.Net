@@ -10,7 +10,7 @@ using Pathfinder.UI.Messages;
 
 namespace Pathfinder.UI.ViewModels
 {
-    public class ToolBarViewModel : MainViewModel
+    public class ToolBarViewModel : PathfinderViewModelBase
     {
         protected override void SetupCommands()
         {

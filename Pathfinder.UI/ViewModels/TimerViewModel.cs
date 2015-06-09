@@ -4,7 +4,7 @@ using GalaSoft.MvvmLight.Command;
 using Pathfinder.UI.Messages;
 namespace Pathfinder.UI.ViewModels
 {
-    public class TimerViewModel : MainViewModel
+    public class TimerViewModel : PathfinderViewModelBase
     {
         private int _ticksPerFrame;
         private bool _playing;

@@ -21,16 +21,15 @@ namespace Pathfinder.UI.Views
     /// </summary>
     public partial class PathfinderMapView : UserControl
     {
-        public PathfinderMapView(MapHostViewModel viewModel)
+        public PathfinderMapView(MapHostViewModel model)
         {
             InitializeComponent();
-            this.ViewModel = viewModel;
+            DataContext = model;
         }
 
         public MapHostViewModel ViewModel 
         {
             get { return (MapHostViewModel)DataContext; }
-            set { DataContext = value; }
         }
 
 

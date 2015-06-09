@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pathfinder.UI.ViewModels
 {
-    public class NodeViewModel : MainViewModel
+    public class NodeViewModel : PathfinderViewModelBase
     {
         private int _xPosition;
         private int _yPositon;

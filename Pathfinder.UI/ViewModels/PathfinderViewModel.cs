@@ -19,7 +19,7 @@ using Rhodes.WpfSandbox.MenuTree;
 
 namespace Pathfinder.UI.ViewModels
 {
-    public class PathfinderViewModel : MainViewModel
+    public class PathfinderViewModel : PathfinderViewModelBase
     {
         // Core Components
         private PathfinderEngine _pathfinder;

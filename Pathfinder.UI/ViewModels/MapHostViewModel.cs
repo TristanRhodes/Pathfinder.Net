@@ -10,7 +10,7 @@ using Rhodes.WpfSandbox.MenuTree;
 
 namespace Pathfinder.UI.ViewModels
 {
-    public class MapHostViewModel : MainViewModel
+    public class MapHostViewModel : PathfinderViewModelBase
     {
         // Core Components
         private World<bool> _world;

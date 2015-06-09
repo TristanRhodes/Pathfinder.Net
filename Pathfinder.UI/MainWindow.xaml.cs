@@ -23,6 +23,12 @@ namespace Pathfinder.UI
         }
 
 
+        public PathfinderViewModel ViewModel
+        {
+            get { return (PathfinderViewModel)DataContext; }
+        }
+
+
         private void RegisterMessages()
         {
             Messenger.Default.Register<ExceptionMessage>(this, HandleExceptionMessage);
@@ -33,13 +39,9 @@ namespace Pathfinder.UI
 
         private void SetupView()
         {
-            var viewModel = new PathfinderViewModel(new DefaultFileService());
-
-            this.DataContext = viewModel;
-
-            MapHost.Content = new PathfinderMapView(viewModel.MapHost);
-            ControlHost.Content = new PathfinderControlView(viewModel);
-            WorkQueueHost.Content = new PathfinderWorkQueueView(viewModel);
+            MapHost.Content = new PathfinderMapView(ViewModel.MapHost);
+            ControlHost.Content = new PathfinderControlView(ViewModel);
+            WorkQueueHost.Content = new PathfinderWorkQueueView(ViewModel);
         }
 
 

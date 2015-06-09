@@ -8,7 +8,8 @@
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         Width="1024" Height="768" Loaded="Window_Loaded" 
         Icon="Resources/PathfinderIcon.png"
-        xmlns:fluent="clr-namespace:Fluent;assembly=Fluent">
+        xmlns:fluent="clr-namespace:Fluent;assembly=Fluent"
+        DataContext="{Binding Pathfinder, Source={StaticResource ViewModelLocator}}">
     <Window.Resources>
         
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>

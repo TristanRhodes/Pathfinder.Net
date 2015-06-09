@@ -12,9 +12,11 @@
   See http://www.galasoft.ch/mvvm
 */
 
+using System;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using Pathfinder.UI.Services;
 
 namespace Pathfinder.UI.ViewModels
 {
@@ -42,14 +44,23 @@ namespace Pathfinder.UI.ViewModels
                 //SimpleIoc.Default.Register<IDataService, DataService>();
             }
 
-            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<IFileService, DefaultFileService>(); 
+            SimpleIoc.Default.Register<PathfinderViewModel>();
         }
 
-        public MainViewModel Main
+        public PathfinderViewModel Pathfinder
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<MainViewModel>();
+                return ServiceLocator.Current.GetInstance<PathfinderViewModel>();
+            }
+        }
+
+        public MapHostViewModel MapHost
+        {
+            get
+            {
+                throw new NotImplementedException();
             }
         }
         

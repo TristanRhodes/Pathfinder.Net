@@ -124,7 +124,7 @@
     <Compile Include="ViewModels\MapHostViewModel.cs" />
     <Compile Include="ViewModels\TimerViewModel.cs" />
     <Compile Include="ViewModels\ToolBarViewModel.cs" />
-    <Compile Include="ViewModels\_MainViewModel.cs" />
+    <Compile Include="ViewModels\PathfinderViewModelBase.cs" />
     <Compile Include="ViewModels\_ViewModelLocator.cs" />
     <Compile Include="Views\PathfinderControlView.xaml.cs">
       <DependentUpon>PathfinderControlView.xaml</DependentUpon>

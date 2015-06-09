@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pathfinder.UI.ViewModels
 {
-    public class MapObjectViewModel : MainViewModel
+    public class MapObjectViewModel : PathfinderViewModelBase
     {
         private int _x;
         private int _y;
