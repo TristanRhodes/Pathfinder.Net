@@ -28,7 +28,6 @@ namespace Pathfinder.UI.ViewModels
         // View Models
         private MenuHostViewModel _menuHostViewModel;
         private MapHostViewModel _mapHostViewModel;
-        private ToolBarViewModel _toolBarViewModel;
 
         // Part Descriptor Parts
         private string _pathLabel;
@@ -137,11 +136,6 @@ namespace Pathfinder.UI.ViewModels
         public MenuHostViewModel MenuHost
         {
             get { return _menuHostViewModel; }
-        }
-
-        public ToolBarViewModel ToolBarHost
-        {
-            get { return _toolBarViewModel; }
         }
 
 
