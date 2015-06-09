@@ -7,7 +7,8 @@
              xmlns:MenuTree="clr-namespace:Rhodes.WpfSandbox.MenuTree"
              mc:Ignorable="d" 
              xmlns:vc="clr-namespace:Pathfinder.UI.ValueConverters"
-             d:DesignHeight="500" d:DesignWidth="300">
+             d:DesignHeight="500" d:DesignWidth="300"
+             DataContext="{Binding Pathfinder, Source={StaticResource ViewModelLocator}}">
     
     <UserControl.Resources>
         

@@ -40,7 +40,7 @@ namespace Pathfinder.UI
         private void SetupView()
         {
             MapHost.Content = new PathfinderMapView(ViewModel.MapHost);
-            ControlHost.Content = new PathfinderControlView(ViewModel);
+            //ControlHost.Content = new PathfinderControlView(ViewModel);
             WorkQueueHost.Content = new PathfinderWorkQueueView(ViewModel);
         }
 

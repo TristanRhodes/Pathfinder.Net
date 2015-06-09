@@ -21,16 +21,9 @@ namespace Pathfinder.UI.Views
     /// </summary>
     public partial class PathfinderControlView : UserControl
     {
-        public PathfinderControlView(PathfinderViewModel viewModel)
+        public PathfinderControlView()
         {
             InitializeComponent();
-            ViewModel = viewModel;
-        }
-
-        public PathfinderViewModel ViewModel 
-        {
-            get { return (PathfinderViewModel)DataContext; }
-            set { DataContext = value;}
         }
     }
 }

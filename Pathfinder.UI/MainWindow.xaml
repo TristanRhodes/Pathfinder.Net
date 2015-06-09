@@ -4,6 +4,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Pathfinder .Net"
+        xmlns:Views="clr-namespace:Pathfinder.UI.Views"
         xmlns:ViewModels="clr-namespace:Pathfinder.UI.ViewModels"
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         Width="1024" Height="768" Loaded="Window_Loaded" 
@@ -127,11 +128,7 @@
                         <!-- Controls Panel-->
                         <xcad:LayoutAnchorablePane DockMinWidth="200" DockWidth="240" DockMinHeight="400">
                             <xcad:LayoutAnchorable ContentId="controls" Title="Controls" IconSource="Resources/ControlsTabIcon.png" CanHide="False" CanClose="False" AutoHideWidth="240">
-                                <ContentControl>
-                                    <ContentControl.Content>
-                                        <ContentControl x:Name="ControlHost"/>
-                                    </ContentControl.Content>
-                                </ContentControl>
+                                <Views:PathfinderControlView/>
                             </xcad:LayoutAnchorable>
                         </xcad:LayoutAnchorablePane>
 
