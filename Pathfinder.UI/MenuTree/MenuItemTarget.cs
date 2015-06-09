@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rhodes.WpfSandbox.MenuTree
+namespace Pathfinder.UI.MenuTree
 {
     public enum MenuItemTarget
     {

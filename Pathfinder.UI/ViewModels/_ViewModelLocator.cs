@@ -17,7 +17,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using Pathfinder.UI.Services;
-using Rhodes.WpfSandbox.MenuTree;
+using Pathfinder.UI.MenuTree;
 
 namespace Pathfinder.UI.ViewModels
 {

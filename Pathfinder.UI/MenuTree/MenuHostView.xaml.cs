@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Rhodes.WpfSandbox.MenuTree
+namespace Pathfinder.UI.MenuTree
 {
     /// <summary>
     /// Interaction logic for MenuHost.xaml

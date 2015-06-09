@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Pathfinder.Core;
 using Pathfinder.Core.CostCalculators;
-using Rhodes.WpfSandbox.MenuTree;
+using Pathfinder.UI.MenuTree;
 
 namespace Pathfinder.UI.ViewModels
 {

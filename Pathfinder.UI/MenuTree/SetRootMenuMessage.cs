@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Rhodes.WpfSandbox.MenuTree;
+using Pathfinder.UI.MenuTree;
 
-namespace Rhodes.WpfSandbox.MenuTree
+namespace Pathfinder.UI.MenuTree
 {
     public class SetRootMenuMessage
     {

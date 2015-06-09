@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Rhodes.WpfSandbox.MenuTree
+namespace Pathfinder.UI.MenuTree
 {
     /// <summary>
     /// Base class for menu items that are displayed in the menu host.

@@ -15,7 +15,7 @@ using Pathfinder.UI.Commands;
 using Pathfinder.UI.Enums;
 using Pathfinder.UI.Messages;
 using Pathfinder.UI.Services;
-using Rhodes.WpfSandbox.MenuTree;
+using Pathfinder.UI.MenuTree;
 
 namespace Pathfinder.UI.ViewModels
 {

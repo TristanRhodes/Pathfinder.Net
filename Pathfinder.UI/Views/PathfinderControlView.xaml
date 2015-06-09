@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"  
-             xmlns:MenuTree="clr-namespace:Rhodes.WpfSandbox.MenuTree"
+             xmlns:MenuTree="clr-namespace:Pathfinder.UI.MenuTree"
              mc:Ignorable="d" 
              xmlns:vc="clr-namespace:Pathfinder.UI.ValueConverters"
              d:DesignHeight="500" d:DesignWidth="300"

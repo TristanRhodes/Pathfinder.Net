@@ -8,7 +8,7 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
-namespace Rhodes.WpfSandbox.MenuTree
+namespace Pathfinder.UI.MenuTree
 {
     public class MenuHostViewModel : ViewModelBase
     {
