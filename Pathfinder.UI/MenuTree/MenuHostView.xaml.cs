@@ -23,6 +23,7 @@ namespace Rhodes.WpfSandbox.MenuTree
         public MenuHostView()
         {
             InitializeComponent();
+            ViewModel = new MenuHostViewModel();
         }
 
         

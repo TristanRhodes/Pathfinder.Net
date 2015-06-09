@@ -28,6 +28,7 @@ namespace Rhodes.WpfSandbox.MenuTree
 
             // Register to events
             MessengerInstance.Register<MenuItemParameterSelectMessage>(this, HandleParameterSelectMessage);
+            MessengerInstance.Register<SetRootMenuMessage>(this, HandleSetRootMenuMessage);
         }
 
 
@@ -140,7 +141,12 @@ namespace Rhodes.WpfSandbox.MenuTree
         }
 
 
-        public void SetHomeMenuItem(MenuItem menuItem)
+        private void HandleSetRootMenuMessage(SetRootMenuMessage msg)
+        {
+            SetHomeMenuItem(msg.Root);
+        }
+
+        private void SetHomeMenuItem(MenuItem menuItem)
         {
             _pageStack.Clear();
             LoadMenuTreeItem(menuItem);

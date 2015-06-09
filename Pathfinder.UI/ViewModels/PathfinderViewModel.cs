@@ -26,7 +26,6 @@ namespace Pathfinder.UI.ViewModels
         private World<bool> _world;
    
         // View Models
-        private MenuHostViewModel _menuHostViewModel;
         private MapHostViewModel _mapHostViewModel;
 
         // Part Descriptor Parts
@@ -57,10 +56,7 @@ namespace Pathfinder.UI.ViewModels
         {
             this.FileService = fileService;
 
-            _menuHostViewModel = CreateMenu();
             _mapHostViewModel = CreateMap();
-
-            CreateNewWorld(9, 9);
         }
 
 
@@ -68,57 +64,6 @@ namespace Pathfinder.UI.ViewModels
         {
             return new MapHostViewModel();
         }
-
-        private MenuHostViewModel CreateMenu()
-        {
-            var rootItem = new MenuItem();
-            rootItem.MenuHeader = "Home";
-            rootItem.MenuHeaderImagePath = "/Pathfinder.UI;component/Resources/Command-Home.png";
-
-            rootItem.Children.Add(new MenuItem()
-            {
-                ExecuteCommand = new RelayCommand<NodeViewModel>(ToggleNode, CanToggleNode),
-                TargetType = MenuItemTarget.SingleTarget,
-                MenuHeader = "Toggle Node",
-                MenuHeaderImagePath = "/Pathfinder.UI;component/Resources/Command-Toggle.png",
-                ButtonToolTip = "Toggle Node",
-                ButtonImagePath = "/Pathfinder.UI;component/Resources/Command-Toggle.png"
-            });
-            rootItem.Children.Add(new MenuItem()
-            {
-                ExecuteCommand = new RelayCommand<NodeViewModel>(ExploreFrom, CanExploreFrom),
-                UndoCommand = new RelayCommand(ExploreFromBack),
-                TargetType = MenuItemTarget.SingleTarget,
-                MenuHeader = "Explore from",
-                MenuHeaderImagePath = "/Pathfinder.UI;component/Resources/Pin-Blue.png",
-                ButtonToolTip = "Solve whole map",
-                ButtonImagePath = "/Pathfinder.UI;component/Resources/Map-One-Pin.png"
-            });
-            rootItem.Children.Add(new MenuItem()
-            {
-                Next = new MenuItem()
-                {
-                    ExecuteCommand = new RelayCommand<NodeViewModel>(SetExploreBetweenTarget, CanSetExploreBetweenTarget),
-                    UndoCommand = new RelayCommand(SetExploreBetweenTargetBack),
-                    TargetType = MenuItemTarget.SingleTarget,
-                    MenuHeader = "Place Target Pin",
-                    MenuHeaderImagePath = "/Pathfinder.UI;component/Resources/Pin-Green.png",
-                },
-                ExecuteCommand = new RelayCommand<NodeViewModel>(SetExploreBetweenSource, CanSetExploreBetweenSource),
-                UndoCommand = new RelayCommand(SetExploreBetweenSourceBack),
-                TargetType = MenuItemTarget.SingleTarget,
-                MenuHeader = "Place Source Pin",
-                MenuHeaderImagePath = "/Pathfinder.UI;component/Resources/Pin-Blue.png",
-                ButtonToolTip = "Explore between two points",
-                ButtonImagePath = "/Pathfinder.UI;component/Resources/Map-Two-Pin.png"
-            });
-
-            var hostViewModel = new MenuHostViewModel();
-            hostViewModel.SetHomeMenuItem(rootItem);
-
-            return hostViewModel;
-        }
-
 
 
         protected override void SubscribeToEvents()
@@ -131,11 +76,6 @@ namespace Pathfinder.UI.ViewModels
         public MapHostViewModel MapHost
         {
             get { return _mapHostViewModel; }
-        }
-
-        public MenuHostViewModel MenuHost
-        {
-            get { return _menuHostViewModel; }
         }
 
 
@@ -237,6 +177,7 @@ namespace Pathfinder.UI.ViewModels
         {
             var world = new World<bool>(width, height, true);
             LoadWorld(world);
+            ConfigureMenu();
         }
         
         public void SaveWorld(string path)
@@ -604,6 +545,65 @@ namespace Pathfinder.UI.ViewModels
         {
             if (_pathfinder != null)
                 _pathfinder.Stop();
+        }
+
+        private void ConfigureMenu()
+        {
+            // Create menu and notify control of root messages
+            var menu = CreateMenu();
+            var msg = new SetRootMenuMessage(menu);
+            this.MessengerInstance.Send(msg);
+        }
+
+        /// <summary>
+        /// Create command menu for use in the MenuTree.
+        /// </summary>
+        /// <returns></returns>
+        private MenuItem CreateMenu()
+        {
+            var rootItem = new MenuItem();
+            rootItem.MenuHeader = "Home";
+            rootItem.MenuHeaderImagePath = "/Pathfinder.UI;component/Resources/Command-Home.png";
+
+            rootItem.Children.Add(new MenuItem()
+            {
+                ExecuteCommand = new RelayCommand<NodeViewModel>(ToggleNode, CanToggleNode),
+                TargetType = MenuItemTarget.SingleTarget,
+                MenuHeader = "Toggle Node",
+                MenuHeaderImagePath = "/Pathfinder.UI;component/Resources/Command-Toggle.png",
+                ButtonToolTip = "Toggle Node",
+                ButtonImagePath = "/Pathfinder.UI;component/Resources/Command-Toggle.png"
+            });
+            rootItem.Children.Add(new MenuItem()
+            {
+                ExecuteCommand = new RelayCommand<NodeViewModel>(ExploreFrom, CanExploreFrom),
+                UndoCommand = new RelayCommand(ExploreFromBack),
+                TargetType = MenuItemTarget.SingleTarget,
+                MenuHeader = "Explore from",
+                MenuHeaderImagePath = "/Pathfinder.UI;component/Resources/Pin-Blue.png",
+                ButtonToolTip = "Solve whole map",
+                ButtonImagePath = "/Pathfinder.UI;component/Resources/Map-One-Pin.png"
+            });
+            rootItem.Children.Add(new MenuItem()
+            {
+                Next = new MenuItem()
+                {
+                    ExecuteCommand = new RelayCommand<NodeViewModel>(SetExploreBetweenTarget, CanSetExploreBetweenTarget),
+                    UndoCommand = new RelayCommand(SetExploreBetweenTargetBack),
+                    TargetType = MenuItemTarget.SingleTarget,
+                    MenuHeader = "Place Target Pin",
+                    MenuHeaderImagePath = "/Pathfinder.UI;component/Resources/Pin-Green.png",
+                },
+                ExecuteCommand = new RelayCommand<NodeViewModel>(SetExploreBetweenSource, CanSetExploreBetweenSource),
+                UndoCommand = new RelayCommand(SetExploreBetweenSourceBack),
+                TargetType = MenuItemTarget.SingleTarget,
+                MenuHeader = "Place Source Pin",
+                MenuHeaderImagePath = "/Pathfinder.UI;component/Resources/Pin-Blue.png",
+                ButtonToolTip = "Explore between two points",
+                ButtonImagePath = "/Pathfinder.UI;component/Resources/Map-Two-Pin.png"
+            });
+
+            return rootItem;
         }
     }
 }

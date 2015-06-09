@@ -29,18 +29,13 @@
             <Setter Property="Padding" Value="0"/>
         </Style>
 
-        <!-- Menu View -->
-        <DataTemplate DataType="{x:Type MenuTree:MenuHostViewModel}">
-            <MenuTree:MenuHostView/>
-        </DataTemplate>
-
     </UserControl.Resources>
     
     <StackPanel Margin="10">
 
         <!-- Command Menu -->
         <GroupBox Header="Command Menu" Style="{StaticResource GroupBoxMargin}">
-            <ContentControl MinHeight="80" Content="{Binding MenuHost}"/>
+            <MenuTree:MenuHostView MinHeight="80"/>
         </GroupBox>
         
         <!-- Movement Mode Buttons -->

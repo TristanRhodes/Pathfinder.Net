@@ -17,6 +17,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using Pathfinder.UI.Services;
+using Rhodes.WpfSandbox.MenuTree;
 
 namespace Pathfinder.UI.ViewModels
 {
@@ -51,6 +52,7 @@ namespace Pathfinder.UI.ViewModels
             SimpleIoc.Default.Register<TimerViewModel>();
             SimpleIoc.Default.Register<ToolBarViewModel>();
             SimpleIoc.Default.Register<PathfinderViewModel>();
+            SimpleIoc.Default.Register<MenuHostViewModel>();
         }
 
         public PathfinderViewModel Pathfinder

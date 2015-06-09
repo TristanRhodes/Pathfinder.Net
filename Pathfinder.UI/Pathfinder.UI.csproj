@@ -112,6 +112,7 @@
     <Compile Include="MenuTree\MenuItemTarget.cs" />
     <Compile Include="Messages\ExceptionMessage.cs" />
     <Compile Include="Messages\ExecuteToolBarCommandMessage.cs" />
+    <Compile Include="MenuTree\SetRootMenuMessage.cs" />
     <Compile Include="Messages\ShowLoadWorldDialogMessage.cs" />
     <Compile Include="Messages\ShowNewWorldDialogMessage.cs" />
     <Compile Include="Messages\ShowSaveWorldDialogMessage.cs" />

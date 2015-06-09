@@ -19,6 +19,9 @@ namespace Pathfinder.UI
         {
             InitializeComponent();
             RegisterMessages();
+
+            // Setup new world
+            ViewModel.CreateNewWorld(9, 9);
         }
 
 
