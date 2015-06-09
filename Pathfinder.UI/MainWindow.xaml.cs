@@ -19,7 +19,6 @@ namespace Pathfinder.UI
         {
             InitializeComponent();
             RegisterMessages();
-            SetupView();
         }
 
 
@@ -35,13 +34,6 @@ namespace Pathfinder.UI
             Messenger.Default.Register<ShowNewWorldDialogMessage>(this, HandleNewWorldDialog);
             Messenger.Default.Register<ShowSaveWorldDialogMessage>(this, HandleSaveWorldDialog);
             Messenger.Default.Register<ShowLoadWorldDialogMessage>(this, HandleLoadWorldDialog);
-        }
-
-        private void SetupView()
-        {
-            MapHost.Content = new PathfinderMapView(ViewModel.MapHost);
-            //ControlHost.Content = new PathfinderControlView(ViewModel);
-            WorkQueueHost.Content = new PathfinderWorkQueueView(ViewModel);
         }
 
 

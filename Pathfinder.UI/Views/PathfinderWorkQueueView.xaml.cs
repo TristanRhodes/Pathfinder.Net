@@ -21,16 +21,9 @@ namespace Pathfinder.UI.Views
     /// </summary>
     public partial class PathfinderWorkQueueView : UserControl
     {
-        public PathfinderWorkQueueView(PathfinderViewModel viewModel)
+        public PathfinderWorkQueueView()
         {
             InitializeComponent();
-            this.ViewModel = viewModel;
-        }
-
-        public PathfinderViewModel ViewModel 
-        {
-            get { return (PathfinderViewModel)DataContext; }
-            set { DataContext = value; }
         }
     }
 }

@@ -7,7 +7,8 @@
             xmlns:local="clr-namespace:Pathfinder.UI"
             xmlns:ViewModels="clr-namespace:Pathfinder.UI.ViewModels"
             xmlns:Converters="clr-namespace:Pathfinder.UI.ValueConverters"
-            mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="800">
+            mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="800"
+              DataContext="{Binding MapHost, Source={StaticResource ViewModelLocator}}">
 
     <UserControl.Resources>
 

@@ -137,7 +137,7 @@
                     <!-- Main Content -->
                     <xcad:LayoutDocumentPane>
                         <xcad:LayoutDocument ContentId="map" Title="Map" IconSource="Resources/MapTabIcon.png" CanClose="False" CanFloat="False">
-                            <ContentControl x:Name="MapHost"/>
+                            <Views:PathfinderMapView/>
                         </xcad:LayoutDocument>
                     </xcad:LayoutDocumentPane>
 
@@ -146,11 +146,7 @@
 
                         <xcad:LayoutAnchorablePane DockMinWidth="240" DockWidth="240">
                             <xcad:LayoutAnchorable ContentId="workqueue" Title="Work Queue" IconSource="Resources/WorkQueueTabIcon.png" CanHide="False" CanClose="False" AutoHideWidth="240" FloatingWidth="240" FloatingLeft="100" FloatingTop="100">
-                                <ContentControl>
-                                    <ContentControl.Content>
-                                        <ContentControl x:Name="WorkQueueHost"/>
-                                    </ContentControl.Content>
-                                </ContentControl>
+                                <Views:PathfinderWorkQueueView/>
                             </xcad:LayoutAnchorable>
                         </xcad:LayoutAnchorablePane>
 
