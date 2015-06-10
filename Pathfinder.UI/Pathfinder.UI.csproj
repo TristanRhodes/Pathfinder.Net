@@ -121,6 +121,7 @@
     <Compile Include="Services\IFileService.cs" />
     <Compile Include="ValueConverters\EnumBooleanConverter.cs" />
     <Compile Include="ValueConverters\InverseBooleanConverter.cs" />
+    <Compile Include="ViewModels\IMapHost.cs" />
     <Compile Include="ViewModels\MapObjectViewModel.cs" />
     <Compile Include="ViewModels\MapHostViewModel.cs" />
     <Compile Include="ViewModels\TimerViewModel.cs" />

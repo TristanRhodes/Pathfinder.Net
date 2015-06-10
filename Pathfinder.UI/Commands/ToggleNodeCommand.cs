@@ -11,12 +11,12 @@ namespace Pathfinder.UI.Commands
 {
     public class ToggleNodeCommand : ICommand
     {
-        private MapHostViewModel _mapHost;
+        private IMapHost _mapHost;
         private Coordinate _coordinate;
         private bool _state;
 
 
-        public ToggleNodeCommand(MapHostViewModel mapHost, Coordinate coordinate, bool state)
+        public ToggleNodeCommand(IMapHost mapHost, Coordinate coordinate, bool state)
         {
             _mapHost = mapHost;
 

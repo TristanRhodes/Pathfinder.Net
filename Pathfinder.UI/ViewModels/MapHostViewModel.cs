@@ -10,7 +10,7 @@ using Pathfinder.UI.MenuTree;
 
 namespace Pathfinder.UI.ViewModels
 {
-    public class MapHostViewModel : PathfinderViewModelBase
+    public class MapHostViewModel : PathfinderViewModelBase, IMapHost
     {
         // Core Components
         private World<bool> _world;

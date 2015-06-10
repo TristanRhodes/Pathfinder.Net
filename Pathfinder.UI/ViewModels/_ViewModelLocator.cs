@@ -53,6 +53,11 @@ namespace Pathfinder.UI.ViewModels
             SimpleIoc.Default.Register<ToolBarViewModel>();
             SimpleIoc.Default.Register<PathfinderViewModel>();
             SimpleIoc.Default.Register<MenuHostViewModel>();
+            SimpleIoc.Default.Register<MapHostViewModel>();
+
+            //NOTE: This seperation is an ongoing concern.
+            SimpleIoc.Default.Register<IMapHost>(SimpleIoc.Default.GetInstance<MapHostViewModel>);
+
         }
 
         public PathfinderViewModel Pathfinder
@@ -83,8 +88,7 @@ namespace Pathfinder.UI.ViewModels
         {
             get
             {
-                var pathfinder = ServiceLocator.Current.GetInstance<PathfinderViewModel>();
-                return pathfinder.MapHost;
+                return ServiceLocator.Current.GetInstance<MapHostViewModel>();
             }
         }
         

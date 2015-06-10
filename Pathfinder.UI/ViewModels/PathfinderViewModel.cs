@@ -26,7 +26,7 @@ namespace Pathfinder.UI.ViewModels
         private World<bool> _world;
    
         // View Models
-        private MapHostViewModel _mapHostViewModel;
+        private IMapHost _mapHost;
 
         // Part Descriptor Parts
         private string _pathLabel;
@@ -47,17 +47,12 @@ namespace Pathfinder.UI.ViewModels
         public IFileService FileService { get; private set; }
 
 
-        public PathfinderViewModel(IFileService fileService)
+        public PathfinderViewModel(IFileService fileService, IMapHost mapHost)
         {
             this.FileService = fileService;
 
-            _mapHostViewModel = CreateMap();
-        }
-
-
-        private MapHostViewModel CreateMap()
-        {
-            return new MapHostViewModel();
+            //IMapHost
+            _mapHost = mapHost;
         }
 
 
@@ -65,13 +60,6 @@ namespace Pathfinder.UI.ViewModels
         {
             this.MessengerInstance.Register<TickMessage>(this, HandleTick);
             this.MessengerInstance.Register<ExecuteToolBarCommandMessage>(this, HandleToolBarCommand);
-        }
-
-
-        //TODO: Isolate and remove.
-        public MapHostViewModel MapHost
-        {
-            get { return _mapHostViewModel; }
         }
 
 
@@ -180,7 +168,7 @@ namespace Pathfinder.UI.ViewModels
         {
             this.SafeExecute(() => 
                     {
-                        this.FileService.SaveWorld(MapHost.World, path);
+                        this.FileService.SaveWorld(_mapHost.World, path);
                     });
         }
         
@@ -196,7 +184,7 @@ namespace Pathfinder.UI.ViewModels
         public void LoadWorld(World<bool> world)
         {
             _world = world;
-            MapHost.LoadWorld(world);
+            _mapHost.LoadWorld(world);
 
             RefreshWorkQueue();
         }
@@ -210,9 +198,9 @@ namespace Pathfinder.UI.ViewModels
         public void ToggleNode(NodeViewModel node)
         {
             var coordinate = new Coordinate(node.XPosition, node.YPosition);
-            var state = !(MapHost.World[node.XPosition, node.YPosition]);
+            var state = !(_mapHost.World[node.XPosition, node.YPosition]);
 
-            var command = new ToggleNodeCommand(MapHost, coordinate, state);
+            var command = new ToggleNodeCommand(_mapHost, coordinate, state);
 
             command.Execute(null);
         }
@@ -236,8 +224,8 @@ namespace Pathfinder.UI.ViewModels
 
         public void ExploreFromBack()
         {
-            MapHost.HideBluePin();
-            MapHost.ClearMap();
+            _mapHost.HideBluePin();
+            _mapHost.ClearMap();
 
             ClearPathfinder();
         }
@@ -256,13 +244,13 @@ namespace Pathfinder.UI.ViewModels
         public void SetExploreBetweenSource(NodeViewModel node)
         {
             _source = new Coordinate(node.XPosition, node.YPosition);
-            MapHost.ShowBluePin(_source);
+            _mapHost.ShowBluePin(_source);
         }
 
         public void SetExploreBetweenSourceBack()
         {
-            MapHost.HideBluePin();
-            MapHost.ClearMap();
+            _mapHost.HideBluePin();
+            _mapHost.ClearMap();
             ClearPathfinder();
         }
 
@@ -275,7 +263,7 @@ namespace Pathfinder.UI.ViewModels
 
             // Check Blue Pin
             var coordinate = new Coordinate(node.XPosition, node.YPosition);
-            if (MapHost.IsBluePinAtPosition(coordinate))
+            if (_mapHost.IsBluePinAtPosition(coordinate))
                 return false;
 
             // Pass
@@ -287,7 +275,7 @@ namespace Pathfinder.UI.ViewModels
             _target = new Coordinate(node.XPosition, node.YPosition);
 
             // Green Pin
-            MapHost.ShowGreenPin(_target);
+            _mapHost.ShowGreenPin(_target);
 
             // Explore
             ExploreBetween(_source, _target);
@@ -295,7 +283,7 @@ namespace Pathfinder.UI.ViewModels
 
         public void SetExploreBetweenTargetBack()
         {
-            MapHost.HideGreenPin();
+            _mapHost.HideGreenPin();
             SetExploreBetweenSourceBack();
         }
 
@@ -303,7 +291,7 @@ namespace Pathfinder.UI.ViewModels
         private void ExploreFrom(Coordinate from)
         {
             // Set Pins
-            MapHost.ShowBluePin(from);
+            _mapHost.ShowBluePin(from);
 
             // Setup
             var costCalculator = new BooleanMapCostCalculator(_world)
@@ -321,8 +309,8 @@ namespace Pathfinder.UI.ViewModels
         private void ExploreBetween(Coordinate from, Coordinate to)
         {
             // Set Pins
-            MapHost.ShowBluePin(from);
-            MapHost.ShowGreenPin(to);
+            _mapHost.ShowBluePin(from);
+            _mapHost.ShowGreenPin(to);
 
             // Setup
             var costCalculator = new BooleanMapCostCalculator(_world) 
@@ -339,7 +327,7 @@ namespace Pathfinder.UI.ViewModels
 
         private void PerformExplore(PathfinderEngine pathfinder, Coordinate from)
         {
-            MapHost.ClearMap();
+            _mapHost.ClearMap();
 
             _pathfinder = pathfinder;
             _pathfinder.ExploreFrom(from);
@@ -463,7 +451,7 @@ namespace Pathfinder.UI.ViewModels
                         node.Value)
                         : string.Empty;
 
-                    MapHost.UpdateNode(x, y, inQueue, text);
+                    _mapHost.UpdateNode(x, y, inQueue, text);
                 }
             }
         }
@@ -482,8 +470,8 @@ namespace Pathfinder.UI.ViewModels
                 DrawTargetedHeuristicLines(lineList);
 
             // Load Lines
-            MapHost.ClearNodes();
-            MapHost.DrawLines(lineList);
+            _mapHost.ClearNodes();
+            _mapHost.DrawLines(lineList);
         }
 
         private void DrawEmptyHeuristicLines(LinkedList<LineViewModel> lineList)
