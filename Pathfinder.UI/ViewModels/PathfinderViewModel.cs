@@ -26,7 +26,6 @@ namespace Pathfinder.UI.ViewModels
         private World<bool> _world;
    
         // View Models
-        private IMapHost _mapHost;
 
         // Part Descriptor Parts
         private string _pathLabel;
@@ -44,14 +43,13 @@ namespace Pathfinder.UI.ViewModels
         private Coordinate _target;
 
         // Dependencies
-        public IFileService FileService { get; private set; }
+        public IFileService _fileService;
+        private IMapHost _mapHost;
 
 
         public PathfinderViewModel(IFileService fileService, IMapHost mapHost)
         {
-            this.FileService = fileService;
-
-            //IMapHost
+            _fileService = fileService;
             _mapHost = mapHost;
         }
 
@@ -168,7 +166,7 @@ namespace Pathfinder.UI.ViewModels
         {
             this.SafeExecute(() => 
                     {
-                        this.FileService.SaveWorld(_mapHost.World, path);
+                        _fileService.SaveWorld(_mapHost.World, path);
                     });
         }
         
@@ -176,7 +174,7 @@ namespace Pathfinder.UI.ViewModels
         {
             this.SafeExecute(() =>
                     {
-                        var world = this.FileService.LoadWorld(path);
+                        var world = _fileService.LoadWorld(path);
                         LoadWorld(world);
                     });
         }
