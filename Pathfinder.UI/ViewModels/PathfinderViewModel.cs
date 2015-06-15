@@ -24,8 +24,6 @@ namespace Pathfinder.UI.ViewModels
         // Core Components
         private PathfinderEngine _pathfinder;
         private World<bool> _world;
-   
-        // View Models
 
         // Part Descriptor Parts
         private string _pathLabel;
@@ -43,7 +41,7 @@ namespace Pathfinder.UI.ViewModels
         private Coordinate _target;
 
         // Dependencies
-        public IFileService _fileService;
+        private IFileService _fileService;
         private IMapHost _mapHost;
 
 
